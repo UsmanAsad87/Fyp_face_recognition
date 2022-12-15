@@ -158,6 +158,7 @@ class _CameraScreenState extends State<CameraScreen> {
                     setState(() {
                       _isRearCameraSelected = !_isRearCameraSelected;
                     });
+                    controller.camChange();
                   },
                   icon: ImageIcon(
                       const AssetImage(

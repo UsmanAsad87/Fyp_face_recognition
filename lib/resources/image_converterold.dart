@@ -1,16 +1,14 @@
-import 'dart:io';
 import 'dart:ui';
 import 'package:image/image.dart' as imglib;
 import 'package:camera/camera.dart';
-import 'package:image/image.dart';
 
 const shift = (0xFF << 24);
-Future<List<int>> convertYUV420toImageColor(CameraImage image,bool rear) async {
+Future<List<int>> convertYUV420toImageColor(CameraImage image) async {
   try {
     final int width = image.width;
     final int height = image.height;
-    final int uvRowStride = image.planes[2].bytesPerRow;
-    final int uvPixelStride = image.planes[2].bytesPerPixel!;
+    final int uvRowStride = image.planes[1].bytesPerRow;
+    final int uvPixelStride = image.planes[1].bytesPerPixel!;
 
     print("uvRowStride: " + uvRowStride.toString());
     print("uvPixelStride: " + uvPixelStride.toString());
@@ -42,14 +40,6 @@ Future<List<int>> convertYUV420toImageColor(CameraImage image,bool rear) async {
     imglib.PngEncoder pngEncoder = new imglib.PngEncoder(level: 0, filter: 0);
     // Convert to png
     List<int> png = pngEncoder.encodeImage(img);
-
-    if(!rear){
-      // front image is inverted so flip vertical in case of front.
-      final Image originalImage      = decodeImage(png)!;
-      final Image orientedImage      = flipVertical(originalImage);
-      png = encodePng(orientedImage);
-    }
-
     return png;
   } catch (e) {
     print(">>>>>>>>>>>> ERROR:" + e.toString());

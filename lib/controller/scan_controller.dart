@@ -14,7 +14,7 @@ class ScanController extends GetxController {
   late List<CameraDescription> _cameras;
   late CameraController _cameraController;
   final RxBool _isInitialized = RxBool(false);
-  final RxBool _isRearCameraSelected = RxBool(false);
+  final RxBool _isRearCameraSelected = RxBool(true);
   //bool _isRearCameraSelected = true;
   CameraImage? _cameraImage;
   final RxList<Uint8List> _imageList = RxList([]);
@@ -116,27 +116,35 @@ class ScanController extends GetxController {
   void initialseFalse(){
     _isInitialized.value = false;
   }
+  void camChange(){
+    _isRearCameraSelected.value = !_isRearCameraSelected.value;
+  }
 
   void capture() async {
     // initCamera();
     if (_cameraImage != null) {
       // using image package but false result
-      // img.Image image = img.Image.fromBytes(
+      // img.Image image1 = img.Image.fromBytes(
       //     _cameraImage!.width, _cameraImage!.height,
       //     _cameraImage!.planes[0].bytes, format: img.Format.bgra);
-      // Uint8List list = Uint8List.fromList(img.encodeJpg(image)); //getting jpeg
+      // Uint8List list1 = Uint8List.fromList(img.encodeJpg(image1)); //getting jpeg
 
-      // using function but rotated image
-      // List<int> image = await convertImagetoPng(_cameraImage!);
-      // Uint8List list = Uint8List.fromList(image);
+      //using function but rotated image
+      // List<int> image1 = await convertImagetoPng(_cameraImage!);
+      // Uint8List list1 = Uint8List.fromList(image1);
 
-      List<int> image = await  convertYUV420toImageColor(_cameraImage!);
+      List<int> image = await  convertYUV420toImageColor(_cameraImage!,_isRearCameraSelected.value);
+      print("Is Rear Camera : "+_isRearCameraSelected.toString());
+      //image=image.reversed.toList();
       Uint8List list = Uint8List.fromList(image);
 
       //final result = await ImageGallerySaver.saveImage(list);
       // print(result);
 
       String imgBase64=uint8ListTob64(list);
+
+
+
      // print(list.length);
       print("image captured");
       findFace(modelName: 'ArcFace', img: imgBase64, location: location.string, ip: ip.string, port: port.string);

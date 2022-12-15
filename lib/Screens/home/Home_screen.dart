@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     });
 
                                     //Todo: need to remove it
-                                    conOk=true;
+                                    //conOk=true;
 
                                     if(conOk){
                                       controller.startCamera();

@@ -34,7 +34,7 @@ class _CameraScreenState extends State<CameraScreen> {
     setState(() {
       closed = false;
     });
-    timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+    timer = Timer.periodic(const Duration(milliseconds: 2000 ), (timer) {
       controller.capture();
       if (closed) {
         cancelTimer();
@@ -47,6 +47,7 @@ class _CameraScreenState extends State<CameraScreen> {
     timer?.cancel();
   }
   Future<bool> _onWillPop() async {
+    controller.closeCamera();
     setState(() {
       closed=true;
     });
@@ -91,6 +92,7 @@ onWillPop: _onWillPop,
                 bottom: 25,
                 child: IconButton(
                     onPressed: () {
+                      controller.closeCamera();
                       setState(() {
                         closed = true;
                       });

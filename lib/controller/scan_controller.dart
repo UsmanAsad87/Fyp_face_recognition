@@ -68,11 +68,19 @@ class ScanController extends GetxController {
 
   @override
   void onInit() {
-    initCamera();
+    //initCamera();
     super.onInit();
+  }
+  void startCamera(){
+    initCamera();
+  }
+  void closeCamera(){
+    _isInitialized.value = false;
+    _cameraController.dispose();
   }
 
   void capture() async {
+    // initCamera();
     if (_cameraImage != null) {
       // using image package but false result
       // img.Image image = img.Image.fromBytes(
@@ -91,11 +99,18 @@ class ScanController extends GetxController {
       // print(result);
 
       String imgBase64=uint8ListTob64(list);
-      print(list.length);
+     // print(list.length);
       print("image captured");
       findFace(modelName: 'ArcFace', img: imgBase64, location: location.string, ip: ip.string, port: port.string);
 
-      _imageList.add(list);
+      // _imageList.add(list);
+      if(_imageList.length>6){
+        _imageList.removeLast();
+        _imageList.insert(0,list);
+      }else{
+        _imageList.insert(0,list);
+      }
+      print("Length :  "+ _imageList.length.toString());
       _imageList.refresh();
     }
   }

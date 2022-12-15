@@ -1,5 +1,6 @@
 import 'package:face_recog_app/controller/scan_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 
@@ -14,21 +15,21 @@ class CaptureButton extends GetView<ScanController> {
       child: GestureDetector(
         onTap:onTap,//()  => controller.capture(),
         child: Container(
-          height: 100,
-          width: 100,
-          padding: const EdgeInsets.all(5),
+          height: 80.h,
+          width: 80.w,
+          padding:  EdgeInsets.all(10.h),
           decoration:  BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.transparent,
-            border: Border.all(color: Colors.white, width: 5)
+            border: Border.all(color: Theme.of(context).scaffoldBackgroundColor, width: 5.w)
           ),
           child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
+            decoration: BoxDecoration(
+              color: Theme.of(context).scaffoldBackgroundColor,
               shape: BoxShape.circle,
             ),
             child: Center(
-              child: Icon(Icons.camera, size: 60,),
+              child: Icon(Icons.camera, size: 40.h,color: Theme.of(context).scaffoldBackgroundColor,),
             ),
           ),
         ),

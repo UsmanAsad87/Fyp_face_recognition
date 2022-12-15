@@ -22,8 +22,6 @@ Future<bool> findFace({
     "img": "${img}",
   };
   String url = 'http://$ip:$port/findface';
-  print(url);
-  print(body);
   try{
     var response = await http.post(
       Uri.parse(url),
@@ -41,12 +39,12 @@ Future<bool> findFace({
 
       if (msg['face_found'] == true) {
         print('face_found');
-        showToast("Face is in database. Entry is added");
+        //showToast("Face is in database. Entry is added");
         return true;
       } else {
         final msg = jsonDecode(response.body);
         print('Face not found');
-        showToast("Face is added in database. Entry is added");
+        //showToast("Face is added in database. Entry is added");
         return false;
       }
     }  else {

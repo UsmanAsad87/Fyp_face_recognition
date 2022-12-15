@@ -30,7 +30,7 @@ class CustomButton extends StatelessWidget {
           width: double.infinity,
           child: Center(
             child: isLoading
-                ? spinKit(color: Theme.of(context).colorScheme.onPrimary)
+                ? spinKit(color: Theme.of(context).scaffoldBackgroundColor)
                 : Text(buttonText, style: GoogleFonts.poppins(
               color: Theme.of(context).scaffoldBackgroundColor,
               fontSize: 16.sp,

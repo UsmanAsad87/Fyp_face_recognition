@@ -21,15 +21,15 @@ class CaptureButton extends GetView<ScanController> {
           decoration:  BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.transparent,
-            border: Border.all(color: Theme.of(context).scaffoldBackgroundColor, width: 5.w)
+            border: Border.all(color: Colors.white, width: 5.w)
           ),
           child: Container(
             decoration: BoxDecoration(
-              color: Theme.of(context).scaffoldBackgroundColor,
+              color: Colors.white,
               shape: BoxShape.circle,
             ),
             child: Center(
-              child: Icon(Icons.camera, size: 40.h,color: Theme.of(context).scaffoldBackgroundColor,),
+              child: Icon(Icons.camera, size: 40.h,color: Colors.white,),
             ),
           ),
         ),

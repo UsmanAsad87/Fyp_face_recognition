@@ -141,6 +141,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     setState(() {
                                       _isLoading=false;
                                     });
+
+                                    //Todo: need to remove it
+                                    conOk=true;
+
                                     if(conOk){
                                       controller.startCamera();
                                       Navigator.push(

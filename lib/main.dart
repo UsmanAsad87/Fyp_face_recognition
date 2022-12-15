@@ -1,4 +1,5 @@
 
+import 'package:camera/camera.dart';
 import 'package:face_recog_app/Screens/welcome/welcome_screen.dart';
 import 'package:face_recog_app/bindings/global_bindings.dart';
 import 'package:face_recog_app/theme.dart';
@@ -8,8 +9,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
+List<CameraDescription> cameras = [];
 
-void main() {
+void main() async {
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    cameras = await availableCameras();
+  } on CameraException catch (e) {
+    print('Error in fetching the cameras: $e');
+  }
   runApp(MyApp());
 }
 

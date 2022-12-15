@@ -8,10 +8,14 @@ import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
+import '../main.dart';
+
 class ScanController extends GetxController {
   late List<CameraDescription> _cameras;
   late CameraController _cameraController;
   final RxBool _isInitialized = RxBool(false);
+  final RxBool _isRearCameraSelected = RxBool(false);
+  //bool _isRearCameraSelected = true;
   CameraImage? _cameraImage;
   final RxList<Uint8List> _imageList = RxList([]);
 
@@ -35,6 +39,7 @@ class ScanController extends GetxController {
 
   CameraController get cameraController => _cameraController;
   bool get isInitialized => _isInitialized.value;
+  bool get isRearCameraSelected => _isRearCameraSelected.value;
   List<Uint8List> get imageList => _imageList;
 
   @override
@@ -43,10 +48,40 @@ class ScanController extends GetxController {
     _cameraController.dispose();
     super.dispose();
   }
+  void onNewCameraSelected(CameraDescription cameraDescription) async {
+    final previousCameraController = _cameraController;
 
+    final CameraController cameraController = CameraController(
+      cameraDescription,
+        ResolutionPreset.veryHigh,
+        imageFormatGroup: ImageFormatGroup.bgra8888
+    );
+
+    await previousCameraController?.dispose();
+
+
+    _cameraController = cameraController;
+    _cameraController.initialize().then((value) {
+      _isInitialized.value = true;
+      _cameraController.startImageStream((image) => _cameraImage = image);
+      _isInitialized.refresh();
+    }).catchError((Object e) {
+      if (e is CameraException) {
+        switch (e.code) {
+          case 'CameraAccessDenied':
+            print('User denied camera access.');
+            break;
+          default:
+            print('Handle other errors.');
+            break;
+        }
+      }
+    });
+  }
   Future<void> initCamera() async {
-    _cameras = await availableCameras();
-    _cameraController = CameraController(_cameras[0], ResolutionPreset.veryHigh,
+    //_cameras = await availableCameras();
+   // _cameraController = CameraController(_cameras[0], ResolutionPreset.veryHigh,
+    _cameraController = CameraController(cameras[0], ResolutionPreset.veryHigh,
         imageFormatGroup: ImageFormatGroup.bgra8888);
     _cameraController.initialize().then((value) {
       _isInitialized.value = true;
@@ -77,6 +112,9 @@ class ScanController extends GetxController {
   void closeCamera(){
     _isInitialized.value = false;
     _cameraController.dispose();
+  }
+  void initialseFalse(){
+    _isInitialized.value = false;
   }
 
   void capture() async {

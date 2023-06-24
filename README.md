@@ -1,17 +1,13 @@
-# face_recog_app
+# Face Recog App
 
-A new Flutter project.
+A Flutter App that sends frames to face recognition and tracking API.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To run the mobile App you need you need
+1.	Android studio / VScode
+2.	Flutter 3.10.1
+3.	Dart 3.0.3
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-"# Fyp_face_recognition" 
+![Mobile_demo](https://github.com/UsmanAsad87/Fyp_face_recognition/assets/92229738/d4a74877-1027-4ec3-b383-2452d4017820)

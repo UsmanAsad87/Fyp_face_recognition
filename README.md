@@ -10,4 +10,4 @@ To run the mobile App you need you need
 3.	Dart 3.0.3
 
 
-![Mobile_demo](https://github.com/UsmanAsad87/Fyp_face_recognition/assets/92229738/d4a74877-1027-4ec3-b383-2452d4017820)
+![Mobile_demo](https://github.com/UsmanAsad87/Fyp_face_recognition/assets/92229738/2204e0b5-a9e0-4a4b-9a27-68da6caf2bc8)

@@ -11,6 +11,7 @@ To run the mobile App you need you need
 3.	Dart 3.0.3
 
 First clone this https://github.com/UsmanAsad87/FaceRecogFYPModel 
-
+run it according to instrucstions
+And provide Ip and port in mobile app
 
 ![Mobile_demo](https://github.com/UsmanAsad87/Fyp_face_recognition/assets/92229738/2204e0b5-a9e0-4a4b-9a27-68da6caf2bc8)
